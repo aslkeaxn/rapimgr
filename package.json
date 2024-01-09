@@ -1,4 +1,14 @@
 {
+  "name": "rapidapi-manager",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "devDependencies": {
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
@@ -6,16 +16,5 @@
   "dependencies": {
     "mailnesia": "^1.0.2",
     "puppeteer": "^21.7.0"
-  },
-  "name": "rapidapi-account-creator",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsc",
-    "dev": "nodemon index.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  }
 }
