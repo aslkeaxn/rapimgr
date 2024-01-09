@@ -9,8 +9,8 @@ enum ErrCA {
   V = "Couldn't verify account",
 }
 
-async function openBrowser() {
-  const browser = await puppeteer.launch({ headless: "new" });
+async function openBrowser(headless: false | "new" = "new") {
+  const browser = await puppeteer.launch({ headless });
   return browser;
 }
 
@@ -109,10 +109,11 @@ export async function createAccount(
   mailbox: string,
   username: string,
   email: string,
-  password: string
+  password: string,
+  headless: false | "new" = "new"
 ) {
   console.log("Starting headless puppeteer browser...");
-  const browser = await openBrowser();
+  const browser = await openBrowser(headless);
 
   console.log("Navigating to RapidAPI...");
   const rapi = await openRapidAPISignUpPage(browser);
