@@ -6,9 +6,9 @@
     "build": "tsc"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "aslkeaxn",
+  "license": "MIT",
+  "description": "```javascript\r function createAccount(mailbox: string, username: string, email: string, password: string, headless?: false | \"new\"): Promise<void>",
   "devDependencies": {
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
@@ -16,5 +16,14 @@
   "dependencies": {
     "mailnesia": "^1.0.2",
     "puppeteer": "^21.7.0"
-  }
+  },
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aslkeaxn/rapidapi-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aslkeaxn/rapidapi-manager/issues"
+  },
+  "homepage": "https://github.com/aslkeaxn/rapidapi-manager#readme"
 }
