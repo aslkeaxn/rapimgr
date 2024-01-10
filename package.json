@@ -14,7 +14,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "mailnesia": "^1.0.2",
+    "mailnesia-api": "^1.0.0",
     "puppeteer": "^21.7.0"
   },
   "types": "./dist/index.d.ts",

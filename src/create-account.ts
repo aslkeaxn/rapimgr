@@ -1,5 +1,5 @@
 import puppeteer, { Browser, Page } from "puppeteer";
-import mailnesia from "mailnesia";
+import mailnesia from "mailnesia-api";
 import { sleep } from "./utils";
 
 enum ErrCA {
