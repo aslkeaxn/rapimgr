@@ -8,7 +8,7 @@
   "keywords": [],
   "author": "aslkeaxn",
   "license": "MIT",
-  "description": "```javascript\r function createAccount(mailbox: string, username: string, email: string, password: string, headless?: false | \"new\"): Promise<void>",
+  "description": "A library to automatically create rapidapi accounts and subscribe to free APIs",
   "devDependencies": {
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
