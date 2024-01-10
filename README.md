@@ -7,7 +7,7 @@ function createAccount(
   email: string,
   password: string,
   headless?: false | "new"
-): Promise<void>;
+): Promise<string>;
 
 function login(
   email: string,

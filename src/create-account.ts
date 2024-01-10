@@ -7,6 +7,9 @@ enum ErrCA {
   SU = "Could not sign up",
   VC = "Couldn't get verification code",
   V = "Couldn't verify account",
+  CAB = "Couldn't find authorization button",
+  CRB = "Couldn't find reveal button",
+  CKP = "Couldn't find key's parent element",
 }
 
 async function openBrowser(headless: false | "new" = "new") {
@@ -105,6 +108,45 @@ async function ascertainSuccess(rapi: Page) {
   throw new Error(ErrCA.V);
 }
 
+async function retrieveAPIKey(page: Page) {
+  await page.goto("https://rapidapi.com/developer/apps");
+  await sleep(5000);
+
+  const authButton = await page.waitForSelector(
+    '[data-id^="security-default-application_"]'
+  );
+
+  if (!authButton) {
+    throw new Error(ErrCA.CAB);
+  }
+
+  await authButton.click();
+
+  const revealButton = await page.waitForSelector(
+    ".ant-btn-text.ant-btn-icon-only"
+  );
+
+  if (!revealButton) {
+    throw new Error(ErrCA.CRB);
+  }
+
+  await revealButton.click();
+
+  const apiKey = await page.evaluate(() => {
+    const div = document.querySelector(
+      ".ant-btn-text.ant-btn-icon-only"
+    )?.parentElement;
+
+    if (!div) {
+      throw new Error(ErrCA.CKP);
+    }
+
+    return `${div.firstChild?.textContent?.trim()}`;
+  });
+
+  return apiKey;
+}
+
 export async function createAccount(
   mailbox: string,
   username: string,
@@ -116,22 +158,28 @@ export async function createAccount(
   const browser = await openBrowser(headless);
 
   console.log("Navigating to RapidAPI...");
-  const rapi = await openRapidAPISignUpPage(browser);
+  const page = await openRapidAPISignUpPage(browser);
 
   console.log("Submitting sign up form...");
-  await submitCredentials(rapi, username, email, password);
+  await submitCredentials(page, username, email, password);
 
   console.log("Fetching verification code from mailbox...");
   const code = await getVerificationCode(mailbox);
 
   console.log("Submitting verification code...");
-  await submitVerificationCode(rapi, code);
+  await submitVerificationCode(page, code);
 
   console.log("Ascertaining success...");
-  await ascertainSuccess(rapi);
+  await ascertainSuccess(page);
 
   console.log("Account successfully created");
 
-  await rapi.close();
+  console.log("Retrieving api key...");
+  const apiKey = await retrieveAPIKey(page);
+  console.log("API Key:", apiKey);
+
+  await page.close();
   await browser.close();
+
+  return apiKey;
 }
