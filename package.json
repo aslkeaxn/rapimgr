@@ -1,5 +1,5 @@
 {
-  "name": "rapidapi-manager",
+  "name": "rapimgr",
   "version": "1.0.5",
   "main": "./dist/index.js",
   "scripts": {
@@ -8,24 +8,24 @@
   "keywords": [],
   "author": "aslkeaxn",
   "license": "MIT",
-  "description": "A library to automatically create rapidapi accounts and subscribe to free APIs",
+  "description": "A rapidapi account manager",
   "devDependencies": {
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "mailnesia-api": "^1.0.0",
+    "osecmail": "^1.0.3",
     "puppeteer": "^21.7.0"
   },
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aslkeaxn/rapidapi-manager.git"
+    "url": "git+https://github.com/aslkeaxn/rapimgr.git"
   },
   "bugs": {
-    "url": "https://github.com/aslkeaxn/rapidapi-manager/issues"
+    "url": "https://github.com/aslkeaxn/rapimgr/issues"
   },
-  "homepage": "https://github.com/aslkeaxn/rapidapi-manager#readme",
+  "homepage": "https://github.com/aslkeaxn/rapimgr#readme",
   "files": [
     "./dist"
   ]

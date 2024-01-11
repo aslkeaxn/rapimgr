@@ -1,11 +1,11 @@
-import { createAccount } from "./src/create-account";
+import { register } from "./src/register";
 import { login } from "./src/login";
 import { subscribe } from "./src/subscribe";
 
-const rapidapi = {
-  createAccount,
+const rapimgr = {
+  register,
   login,
   subscribe,
 };
 
-export default rapidapi;
+export default rapimgr;
