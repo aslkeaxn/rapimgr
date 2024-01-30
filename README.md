@@ -1,5 +1,3 @@
-## Usage
-
 Create a Rapid API account using a Firefox Relay mask and save the default application's api key
 
 ```typescript
@@ -18,24 +16,11 @@ const rapidPassword = "Password123456$";
 const apiKey = await register(username, mask, rapidPassword, login, domain);
 ```
 
-Subscribe to an API
+Subscribe to an API's free plan
 
 ```typescript
 const email = "...";
 const password = "...";
 const pricingUrl = "...";
 await subscribe(email, password, pricingUrl);
-```
-
-## Type Definitions
-
-```typescript
-function register(
-  username: string,
-  mask: string,
-  password: string,
-  login: string,
-  domain: string,
-  headless?: false | "new"
-): Promise<string>;
 ```
