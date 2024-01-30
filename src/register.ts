@@ -70,6 +70,28 @@ export async function register(
 
   if (url === page.url()) throw new Error("Couldn't verify account");
 
+  await page.goto("https://rapidapi.com/developer/apps");
+
+  const aButton = await page.waitForSelector(
+    "button[data-id*=security-default-application]"
+  );
+  if (!aButton) throw new Error("Couldn't find authorization button");
+  await aButton.click();
+
+  const sButton = await page.waitForSelector(
+    'button[class*="ant-btn ant-btn-text ant-btn-icon-only"]'
+  );
+  if (!sButton) throw new Error("Couldn't find show api key button");
+  await sButton.click();
+
+  const span = await page.waitForSelector("td div span");
+  if (!span) throw new Error("Couldn't find api key span");
+
+  const apiKey = await span.evaluate((span) => span.textContent);
+  if (!apiKey) throw new Error("Couldn't extract api key");
+
   await page.close();
   await browser.close();
+
+  return apiKey;
 }
