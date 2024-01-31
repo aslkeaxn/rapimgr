@@ -14,7 +14,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "fxrmc": "^1.0.11",
+    "fxrmc": "^1.0.14",
     "osecmail": "^1.0.3",
     "puppeteer": "^21.7.0"
   },

@@ -1,32 +1,38 @@
-import puppeteer from "puppeteer";
+import puppeteer, { PuppeteerLaunchOptions } from "puppeteer";
 import { sleep } from "./sleep";
 
 export async function login(
   email: string,
   password: string,
-  headless: false | "new" = "new"
+  options: PuppeteerLaunchOptions = { headless: "new" }
 ) {
-  const browser = await puppeteer.launch({ headless });
-  const pages = await browser.pages();
-  const page = pages[0];
+  const browser = await puppeteer.launch(options);
 
-  await page.goto("https://rapidapi.com/auth/login");
+  try {
+    const pages = await browser.pages();
+    const page = pages[0];
 
-  await page.locator("#login-form_email").fill(email);
-  await page.locator("#login-form_password").fill(password);
+    await page.goto("https://rapidapi.com/auth/login");
 
-  const siButton = await page.waitForSelector("button ::-p-text(Sign In)");
-  if (!siButton) throw new Error("Couldn't find sign in button");
+    await page.locator("#login-form_email").fill(email);
+    await page.locator("#login-form_password").fill(password);
 
-  let i = 0;
-  const url = page.url();
-  while (i < 10 && page.url() === url) {
-    i++;
-    await siButton.click();
-    await sleep(5000);
+    const siButton = await page.waitForSelector("button ::-p-text(Sign In)");
+    if (!siButton) throw new Error("Couldn't find sign in button");
+
+    let i = 0;
+    const url = page.url();
+    while (i < 10 && page.url() === url) {
+      i++;
+      await siButton.click();
+      await sleep(5000);
+    }
+
+    if (page.url() === url) throw new Error("Couldn't sign in");
+
+    return { browser, page };
+  } catch (error: any) {
+    await browser.close();
+    throw new Error(error);
   }
-
-  if (page.url() === url) throw new Error("Couldn't sign in");
-
-  return { browser, page };
 }
